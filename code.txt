@@ -1,0 +1,318 @@
+ORG 0000H
+
+	MOV TMOD,#20H 
+	MOV TH1,#0FDH
+	MOV SCON,#50H 
+	SETB TR1
+	
+	MOV A, #38H 
+	ACALL Command
+	ACALL Delay
+	MOV A, #0EH 
+	ACALL Command
+	ACALL Delay
+	MOV A, #01H 
+	ACALL Command
+	ACALL Delay
+	MOV A, #080H 
+	ACALL Command
+	ACALL Delay
+	ACALL TEXT1
+	ACALL LINE2
+	ACALL TEXT2
+Again:
+	MOV R5, #12D
+	MOV R0, #20H
+	
+	MOV R1, #0C0H
+EPD:ACALL Delay
+	DJNZ R1, EPD
+	
+	MOV A, #080H 
+	ACALL Command
+	ACALL Delay
+	MOV DPTR,#D1
+	ACALL String
+	MOV A, #0C0H 
+	ACALL Command
+	ACALL Delay
+	MOV DPTR,#D2
+	ACALL String
+	
+RFID:
+LOOP: JNB RI, LOOP
+	ACALL SERIAL
+	INC R0
+	DEC R5
+	CJNE R5, #00H, RFID
+
+    MOV R0, #20H
+	CJNE @R0,#"0",PERSON2
+	INC R0
+	CJNE @R0,#"1",PERSON2
+	INC R0
+	CJNE @R0,#"2",PERSON2
+	INC R0
+	CJNE @R0,#"3",PERSON2
+	INC R0
+	CJNE @R0,#"4",PERSON2
+	INC R0
+	CJNE @R0,#"5",PERSON2
+	INC R0
+	CJNE @R0,#"6",PERSON2
+	INC R0
+	CJNE @R0,#"7",PERSON2
+	INC R0
+	CJNE @R0,#"8",PERSON2
+	INC R0
+	CJNE @R0,#"9",PERSON2
+	INC R0
+	CJNE @R0,#"A",PERSON2
+	INC R0
+	CJNE @R0,#"B",PERSON2
+	INC R0
+	MOV A, #080H 
+	ACALL Command
+	ACALL Delay
+	MOV DPTR,#STUDENT1
+	ACALL String
+	MOV A, #0C0H 
+	ACALL Command
+	ACALL Delay
+	MOV DPTR,#PR1
+	ACALL String
+	JMP Again
+	
+PERSON2:
+    MOV R0, #20H
+	CJNE @R0,#"B",PERSON3
+	INC R0
+	CJNE @R0,#"A",PERSON3
+	INC R0
+	CJNE @R0,#"9",PERSON3
+	INC R0
+	CJNE @R0,#"8",PERSON3
+	INC R0
+	CJNE @R0,#"7",PERSON3
+	INC R0
+	CJNE @R0,#"6",PERSON3
+	INC R0
+	CJNE @R0,#"5",PERSON3
+	INC R0
+	CJNE @R0,#"4",PERSON3
+	INC R0
+	CJNE @R0,#"3",PERSON3
+	INC R0
+	CJNE @R0,#"2",PERSON3
+	INC R0
+	CJNE @R0,#"1",PERSON3
+	INC R0
+	CJNE @R0,#"0",PERSON3
+	INC R0
+	MOV A, #080H 
+	ACALL Command
+	ACALL Delay
+	MOV DPTR,#STUDENT2
+	ACALL String
+	MOV A, #0C0H 
+	ACALL Command
+	ACALL Delay
+	MOV DPTR,#PR1
+	ACALL String
+	JMP Again
+	
+PERSON3:
+    MOV R0, #20H
+	CJNE @R0,#"3",PERSON4
+	INC R0
+	CJNE @R0,#"2",PERSON4
+	INC R0
+	CJNE @R0,#"3",PERSON4
+	INC R0
+	CJNE @R0,#"2",PERSON4
+	INC R0
+	CJNE @R0,#"3",PERSON4
+	INC R0
+	CJNE @R0,#"2",PERSON4
+	INC R0
+	CJNE @R0,#"3",PERSON4
+	INC R0
+	CJNE @R0,#"2",PERSON4
+	INC R0
+	CJNE @R0,#"3",PERSON4
+	INC R0
+	CJNE @R0,#"2",PERSON4
+	INC R0
+	CJNE @R0,#"3",PERSON4
+	INC R0
+	CJNE @R0,#"2",PERSON4
+	INC R0
+	MOV A, #080H 
+	ACALL Command
+	ACALL Delay
+	MOV DPTR,#STUDENT3
+	ACALL String
+	MOV A, #0C0H 
+	ACALL Command
+	ACALL Delay
+	MOV DPTR,#PR1
+	ACALL String
+	JMP Again
+	
+PERSON4:
+    MOV R0, #20H
+	CJNE @R0,#"4",ERROR
+	INC R0
+	CJNE @R0,#"3",ERROR
+	INC R0
+	CJNE @R0,#"4",ERROR
+	INC R0
+	CJNE @R0,#"3",ERROR
+	INC R0
+	CJNE @R0,#"4",ERROR
+	INC R0
+	CJNE @R0,#"3",ERROR
+	INC R0
+	CJNE @R0,#"4",ERROR
+	INC R0
+	CJNE @R0,#"3",ERROR
+	INC R0
+	CJNE @R0,#"4",ERROR
+	INC R0
+	CJNE @R0,#"3",ERROR
+	INC R0
+	CJNE @R0,#"4",ERROR
+	INC R0
+	CJNE @R0,#"3",ERROR
+	INC R0
+	MOV A, #080H 
+	ACALL Command
+	ACALL Delay
+	MOV DPTR,#STUDENT4
+	ACALL String
+	MOV A, #0C0H 
+	ACALL Command
+	ACALL Delay
+	MOV DPTR,#PR1
+	ACALL String
+	JMP Again
+
+ERROR:
+	MOV A, #080H 
+	ACALL Command
+	ACALL Delay
+	MOV DPTR,#E1
+	ACALL String
+	MOV A, #0C0H 
+	ACALL Command
+	ACALL Delay
+	MOV DPTR,#E2
+	ACALL String
+	JMP Again
+
+Command: 
+	 CLR P3.7
+	 CLR P3.6
+	 SETB P3.5
+	 MOV P2, A
+	 ACALL Delay
+	 CLR P3.5
+	 RET
+	 
+TEXT1: MOV A,#52H            
+    ACALL Datas           
+    MOV A,#46H               
+    ACALL Datas           
+    MOV A,#49H               
+    ACALL Datas           
+    MOV A,#44H               
+    ACALL Datas            
+    MOV A,#20H               
+    ACALL Datas           
+    MOV A,#52H               
+    ACALL Datas            
+    MOV A,#45H               
+    ACALL Datas            
+    MOV A,#41H               
+    ACALL Datas            
+    MOV A,#44H               
+    ACALL Datas            
+    MOV A,#45H               
+    ACALL Datas           
+    MOV A,#52H               
+    ACALL Datas            
+    RET
+	
+TEXT2: MOV A,#53H            
+    ACALL Datas            
+    MOV A,#77H               
+    ACALL Datas           
+    MOV A,#69H               
+    ACALL Datas           
+    MOV A,#70H               
+    ACALL Datas           
+    MOV A,#65H               
+    ACALL Datas            
+    MOV A,#20H               
+    ACALL Datas           
+    MOV A,#63H               
+    ACALL Datas            
+    MOV A,#61H               
+    ACALL Datas           
+    MOV A,#72H               
+    ACALL Datas            
+    MOV A,#64H               
+    ACALL Datas           
+    MOV A,#2EH               
+    ACALL Datas            
+    MOV A,#2EH               
+    ACALL Datas           
+	RET
+	
+LINE2:MOV A,#0C0H            
+    ACALL Command             
+    RET                      
+
+Datas: 
+	 SETB P3.7
+	 CLR P3.6
+	 SETB P3.5
+	 MOV P2, A
+	 ACALL Delay
+	 CLR P3.5
+	 RET
+	 
+Delay:
+	  MOV R6, #0FFH
+Her1: MOV R7, #0AH
+Here: DJNZ R7, Here
+	  DJNZ R6, Her1
+	  RET
+	  
+String:
+L1: CLR A
+	MOVC A,@A+DPTR
+	JZ Finish
+	ACALL Datas
+	ACALL Delay
+	INC DPTR
+	SJMP L1
+Finish:RET
+
+SERIAL:
+	CLR RI
+	MOV A, SBUF
+	MOV @R0, A
+	RET
+	
+D1:DB 'Scan ID Card....',0
+D2:DB '   MPMC CLASS   ',0
+STUDENT1:DB 'SUJAL(22BEC1209)',0
+STUDENT2:DB 'SAUJANYA(22BEC1243)',0
+STUDENT3:DB 'NAVNEET(22BEC1230)',0
+STUDENT4:DB 'MIHIRA(22BEC1316)',0
+PR1:DB 'PRESENT         ',0
+E1:DB 'UNAUTHORISED... ',0
+E2:DB 'Please Try Again',0
+	
+END
